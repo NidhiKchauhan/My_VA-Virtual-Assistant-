@@ -1,6 +1,7 @@
 import wx
 import wikipedia
 import wolframalpha
+import pyttsx3
 
 class MyFrame(wx.Frame):
     def __init__(self):
@@ -8,7 +9,7 @@ class MyFrame(wx.Frame):
             pos=wx.DefaultPosition, size=wx.Size(450, 100),
             style=wx.MINIMIZE_BOX | wx.SYSTEM_MENU | wx.CAPTION |
              wx.CLOSE_BOX | wx.CLIP_CHILDREN,
-            title="PyDa")
+            title="My_VA")
         panel = wx.Panel(self)
         my_sizer = wx.BoxSizer(wx.VERTICAL)
         lbl = wx.StaticText(panel,
@@ -31,14 +32,18 @@ class MyFrame(wx.Frame):
             res = client.query(input)
             answer = next(res.results).text
             print answer
+            #espeak.synth("The answer is "+answer)
         except:
             #wikipedia
             input = input.split(' ')
             input = " ".join(input[2:])
+            #espeak.synth("Searched for "+input)
             print wikipedia.summary(input)
-
 
 if __name__ == "__main__":
     app = wx.App(True)
     frame = MyFrame()
+    engine = pyttsx3.init();
+    engine.say("Hello I am My VA, the Python virtual Assistant. How can I help you?");
+    engine.runAndWait();
     app.MainLoop()
