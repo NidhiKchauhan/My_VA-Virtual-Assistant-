@@ -26,7 +26,7 @@ class MyFrame(wx.Frame):
         input = input.lower()
         try:
             #wolframalpha
-            app_id = "YOUR APP ID"
+            app_id = "RJEUEA-U2HHRPRXGL"
             client = wolframalpha.Client(app_id)
             res = client.query(input)
             answer = next(res.results).text
